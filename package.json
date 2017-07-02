@@ -1,0 +1,46 @@
+{
+  "name": "nim",
+  "version": "0.0.1",
+  "description": "vue three.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build/build.js",
+    "dev": "node build/dev.js"
+  },
+  "keywords": [],
+  "author": "liang.qi",
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "eventsource-polyfill": "^0.9.6",
+    "express": "^4.14.0",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.25.0",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "mockjs": "^1.0.1-beta3",
+    "nprogress": "^0.2.0",
+    "postcss": "^5.2.10",
+    "postcss-loader": "^1.2.2",
+    "postcss-salad": "^1.0.8",
+    "promise": "^7.1.1",
+    "queue": "^4.2.1",
+    "shelljs": "^0.7.6",
+    "style-loader": "^0.13.1",
+    "topojson": "^2.2.0",
+    "url-loader": "^0.5.7",
+    "vue-loader": "^10.0.0",
+    "vue-style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.1.8",
+    "vuedraggable": "^2.9.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-middleware": "^1.9.0",
+    "webpack-hot-middleware": "^2.14.0",
+    "webpack-merge": "^2.4.0"
+  },
+  "dependencies": {
+    "jqlite": "^0.2.42",
+    "jquery": "^3.1.1",
+    "three": "^0.86.0",
+    "vue": "^2.1.0"
+  }
+}

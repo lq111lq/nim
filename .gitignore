@@ -1,0 +1,14 @@
+/node_modules
+
+/**/node_modules
+
+/**/coverage
+/.externalToolBuilders
+
+/.settings
+
+/.project
+
+/**/.idea
+
+*.log
