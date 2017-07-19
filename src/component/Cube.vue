@@ -7,11 +7,24 @@
     var THREE = require('three');
     module.exports = {
         name: 'Cube',
-        extends:require('./core/Object3D.js'),
+        extends: require('./core/Object3D.js'),
+        watch: {
+            mouseover: function(value) {
+                if(value) {
+                    this.material && this.material.color.set( 0xff0000 );
+                } else {
+                    this.material && this.material.color.set( 0x00ff00 );
+                }
+            }
+        },
         mounted: function() {
-            var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-            var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-            var cube = new THREE.Mesh( geometry, material );
+            var geometry = new THREE.BoxGeometry(1, 1, 1);
+            var material = new THREE.MeshBasicMaterial({
+                color: 0x00ff00
+            });
+            this.material = material;
+            var cube = new THREE.Mesh(geometry, material);
+            
             this.object3D = cube;
             this.$emit('object3DCreated');
             console.log('Cube created');

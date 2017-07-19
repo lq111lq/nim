@@ -1,3 +1,4 @@
+var $ = require('jqlite');
 module.exports = {
     name: 'Object3D',
     mixins: [
@@ -5,11 +6,26 @@ module.exports = {
         require('./mixin/rotation.js'),
         require('./mixin/scale.js')
     ],
+    data: function() {
+        return {
+            mouseover: false
+        }
+    },
+    watch: {
+        mouseover:function(value) {
+            if(value) {
+                $(this.$el).trigger('mouseenter');
+            } else {
+                $(this.$el).trigger('mouseout');
+            }
+        }
+    },
     beforeMount: function() {
         var self = this;
         this.$on('object3DCreated', function() {
             this.object3D.element = this.$el;
-            
+            this.object3D.vm = this;
+
             this.$parent &&
                 this.$parent.object3D &&
                 this.object3D &&
@@ -24,6 +40,7 @@ module.exports = {
         this.$on('object3DDestroy', function() {
             if(this.object3D) {
                 this.object3D.element = null;
+                this.object3D.vm = null;
             }
             this.$parent &&
                 this.$parent.object3D &&
