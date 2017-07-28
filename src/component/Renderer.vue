@@ -9,7 +9,6 @@
     var THREE = require('three');
     module.exports = {
         name: 'Renderer',
-        extends: require('./core/Object3D.js'),
         data: function() {
             return {
                 w: 0,

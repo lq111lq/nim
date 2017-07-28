@@ -32,7 +32,7 @@ var hotMiddleware = require("webpack-hot-middleware")(compiler);
 app.use(devMiddleware);
 app.use(hotMiddleware);
 
-app.use('/dev/static', express.static('./static'));
+app.use('/dev/static', express.static('./examples/static'));
 
 app.listen(3000, function() {
     console.log("Dev on port 3000!");

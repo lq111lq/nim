@@ -7,7 +7,7 @@
     var THREE = require('three');
     module.exports = {
         name: 'PerspectiveCamera',
-        extends: require('../core/Object3D.js'),
+        extends: require('../core/Object3D.vue'),
         mounted: function() {
             var $parentEl = $(this.$parent.$el);
             var w = $parentEl.width();

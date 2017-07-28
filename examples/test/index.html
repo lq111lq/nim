@@ -26,9 +26,28 @@
     </head>
 
     <body>
+        <div id="Stats-output"></div>
         <div id="app">
 
         </div>
+        <script src="static/stats.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            var stats = new Stats();
+            stats.setMode(0); // 0: fps, 1: ms
+
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.right = '0px';
+            stats.domElement.style.top = '43px';
+            stats.domElement.style.zIndex = 10000;
+
+            document.getElementById("Stats-output").appendChild(stats.domElement);
+
+            function render() {
+                stats.update();
+                requestAnimationFrame(render);
+            }
+            render();
+        </script>
     </body>
 
 </html>

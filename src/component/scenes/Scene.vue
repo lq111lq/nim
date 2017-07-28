@@ -7,7 +7,7 @@
     var THREE = require('three');
     module.exports = {
         name: 'Scene',
-        extends: require('../core/Object3D.js'),
+        extends: require('../core/Object3D.vue'),
         mounted: function() {
             var scene = new THREE.Scene();
 

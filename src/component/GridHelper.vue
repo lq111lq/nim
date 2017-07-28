@@ -7,7 +7,7 @@
     var THREE = require('three');
     module.exports = {
         name: 'GridHelper',
-        extends: require('./core/Object3D.js'),
+        extends: require('./core/Object3D.vue'),
         props: {
             size: {
                 type: Number,
