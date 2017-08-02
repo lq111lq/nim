@@ -25,6 +25,11 @@
                 }
             }
         },
+        methods: {
+            getRenderer: function(x, y, z) {
+                return this.$parent ? this.$parent.getRenderer():undefined;
+            }
+        },
         beforeMount: function() {
             var self = this;
             this.$on('object3DCreated', function() {

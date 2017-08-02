@@ -4,7 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var config = {
     entry: {
-        test: ['./examples/test/index.js']
+        index: ['./examples/index.js']
     },
     output: {
         filename: '[name].[hash:8].js',
@@ -47,17 +47,21 @@ var config = {
             'src': path.resolve(__dirname, '../src')
         }
     },
-    plugins: []
+    plugins: [new HtmlWebpackPlugin({
+        chunks: ['vender', 'common', 'index'],
+        filename: 'index.html',
+        template: 'examples/index.html'
+    })]
 }
 
-var examples = ['test'];
-examples.forEach(function(name) {
-    config.entry[name] = ['./examples/' + name + '/index.js'];
-    config.plugins.push(new HtmlWebpackPlugin({
-        chunks: ['vender', 'common', name],
-        filename: name + '.html',
-        template: 'examples/' + name + '/index.html'
-    }));
-})
+//var examples = ['test'];
+//examples.forEach(function(name) {
+//  config.entry[name] = ['./examples/' + name + '/index.js'];
+//  config.plugins.push(new HtmlWebpackPlugin({
+//      chunks: ['vender', 'common', name],
+//      filename: name + '.html',
+//      template: 'examples/' + name + '/index.html'
+//  }));
+//})
 
 module.exports = config;

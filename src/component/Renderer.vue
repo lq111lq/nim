@@ -1,5 +1,5 @@
 <template>
-    <div ref="container">
+    <div>
         <slot></slot>
     </div>
 </template>
@@ -16,7 +16,7 @@
             }
         },
         props: {
-
+            control: Function
         },
         watch: {
             w: 'resize',
@@ -26,13 +26,6 @@
             var $el = $(this.$el);
             this.w = $el.width();
             this.h = $el.height();
-
-            this.$on('rendererCreated', function() {
-
-            });
-            this.$on('rendererDestroy', function() {
-
-            })
         },
         mounted: function() {
             var self = this;
@@ -57,7 +50,6 @@
             this.$el.addEventListener('click', onClick, false);
             this.$el.addEventListener('mouseover', onMouseover, false);
             this.$el.addEventListener('mousemove', onMouseover, false);
-            
 
             var raycaster = new THREE.Raycaster();
 
@@ -77,7 +69,7 @@
 
                 var allVisibleObjects = [];
 
-                self.scene.traverseVisible(function(object) {
+                self.scene && self.scene.traverseVisible(function(object) {
                     allVisibleObjects.push(object);
                 });
 
@@ -107,7 +99,7 @@
 
                 var allVisibleObjects = [];
 
-                self.scene.traverseVisible(function(object) {
+                self.scene && self.scene.traverseVisible(function(object) {
                     allVisibleObjects.push(object);
                 });
 
@@ -134,6 +126,11 @@
             this.$emit('rendererCreated');
         },
         methods: {
+
+            getRenderer: function(x, y, z) {
+                return this;
+            },
+
             resize: function() {
                 if(this.camera) {
                     this.camera.aspect = this.w / this.h;

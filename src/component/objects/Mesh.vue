@@ -18,14 +18,15 @@
                 if(this.object3D) {
                     this.object3D.geometry = geometry;
                 }
+             },
+             material:function(material) {
+                if(this.object3D) {
+                    this.object3D.material = material;
+                }
              }
         },
         mounted: function() {
             var mesh = new THREE.Mesh();
-            
-            var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-            material.needsUpdate = true;
-            mesh.material = material;
             
             this.object3D = mesh;
             this.$emit('object3DCreated');

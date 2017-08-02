@@ -38,9 +38,11 @@
     "webpack-merge": "^2.4.0"
   },
   "dependencies": {
+    "element-ui": "^1.4.1",
     "jqlite": "^0.2.42",
     "jquery": "^3.1.1",
     "three": "^0.86.0",
-    "vue": "^2.1.0"
+    "vue": "^2.1.0",
+    "vue-router": "^2.7.0"
   }
 }
