@@ -12,10 +12,12 @@ nim.install = function(Vue, options) {
     Vue.component('scene',require('./component/scenes/Scene.vue'));
     
     Vue.component('mesh',require('./component/objects/Mesh.vue'));
+    Vue.component('sprite',require('./component/objects/Sprite.vue'));
     Vue.component('n-line',require('./component/objects/Line.vue'));
     
     Vue.component('mesh-basic-material',require('./component/materials/MeshBasicMaterial.vue'));
     Vue.component('line-basic-material',require('./component/materials/LineBasicMaterial.vue'));
+    Vue.component('sprite-material',require('./component/materials/SpriteMaterial.vue'));
     
     Vue.component('texture',require('./component/textures/Texture.vue'));
     

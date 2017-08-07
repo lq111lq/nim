@@ -4,7 +4,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var config = {
     entry: {
-        index: ['./examples/index.js']
+        index: ['./examples/index.js'],
+        vendor: ['three','element-ui']
     },
     output: {
         filename: '[name].[hash:8].js',
@@ -48,7 +49,7 @@ var config = {
         }
     },
     plugins: [new HtmlWebpackPlugin({
-        chunks: ['vender', 'common', 'index'],
+        chunks: ['vendor', 'common', 'index'],
         filename: 'index.html',
         template: 'examples/index.html'
     })]

@@ -18,6 +18,8 @@ var routes = [
   
   { path: '/TextureTest', component: require('./test/texture/TextureTest.vue') },
   
+  { path: '/SpriteTest', component: require('./test/sprite/SpriteTest.vue') },
+  
   { path: '/Cubo', component: require('./demo/Cubo.vue') },
   
   { path: '*', redirect: '/helloWorld'}

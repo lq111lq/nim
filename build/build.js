@@ -9,21 +9,20 @@ var baseWebpackConfig = require('./webpack.config.js');
 var webpackConfig = merge(baseWebpackConfig, {
     devtool: '#eval-source-map',
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.NoErrorsPlugin()
+    new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor' // Specify the common bundle's name.
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ]
-//  plugins: [
-//      new webpack.DefinePlugin({
-//          'process.env': {
-//              NODE_ENV: '"production"'
-//          }
-//      }),
-//      new webpack.optimize.UglifyJsPlugin({
-//          compress: {
-//              warnings: false
-//          }
-//      })
-//  ]
 });
 
 delete webpackConfig.devtool;
@@ -32,7 +31,7 @@ var assetsPath = path.resolve(__dirname, '../dist/');
 
 rm('-rf', assetsPath);
 mkdir('-p', assetsPath);
-cp('-R', path.resolve(__dirname, '../static/'), assetsPath);
+cp('-R', path.resolve(__dirname, '../examples/static/'), assetsPath);
 //cp('-R', path.resolve(__dirname, '../html/'), assetsPath);
 
 webpack(webpackConfig, function(err, stats) {

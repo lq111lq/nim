@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slot></slot>
+        <span style="display: none;" @click.stop><slot></slot></span>
     </div>
 </template>
 
@@ -68,9 +68,11 @@
                 event.preventDefault();
 
                 var mouse = new THREE.Vector2();
+                
+                var offset = $(self.$el).offset();
 
-                mouse.x = (event.clientX / width) * 2 - 1;
-                mouse.y = -(event.clientY / height) * 2 + 1;
+                mouse.x = ((event.clientX-offset.left) / width) * 2 - 1;
+                mouse.y = -((event.clientY-offset.top) / height) * 2 + 1;
 
                 raycaster.setFromCamera(mouse, self.camera);
 
@@ -99,8 +101,10 @@
 
                 var mouse = new THREE.Vector2();
 
-                mouse.x = (event.clientX / width) * 2 - 1;
-                mouse.y = -(event.clientY / height) * 2 + 1;
+                var offset = $(self.$el).offset();
+
+                mouse.x = ((event.clientX-offset.left) / width) * 2 - 1;
+                mouse.y = -((event.clientY-offset.top) / height) * 2 + 1;
 
                 raycaster.setFromCamera(mouse, self.camera);
 
@@ -111,6 +115,7 @@
                 });
 
                 var intersects = raycaster.intersectObjects(allVisibleObjects, true);
+                
                 var ids = [];
                 intersects.forEach(function(intersect) {
                     if(ids.indexOf(intersect.object.id) === -1) {

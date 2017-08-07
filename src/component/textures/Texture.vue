@@ -1,5 +1,5 @@
 <template>
-    <span></span>
+    <span><slot></slot></span>
 </template>
 
 <script>
@@ -10,11 +10,16 @@
             src: String
         },
         watch: {
-            src:'load'
+            src: 'load'
         },
         methods: {
             load: function() {
                 var self = this;
+                
+                if(!this.src){
+                    return;
+                }
+                
                 var loader = new THREE.TextureLoader();
                 loader.load(
                     // resource URL
@@ -39,6 +44,17 @@
                         self.texture && self.texture.dispose();
                     }
                 );
+            },
+            setCanvas: function(canvas) {
+
+                var texture = new THREE.Texture(canvas);
+                texture.needsUpdate = true;
+                
+                var oldTexture = self.texture;
+                this.texture = texture;
+                this.$parent && this.$parent.$emit('updateMap');
+                
+                oldTexture && oldTexture.dispose();
             }
         },
         mounted: function() {

@@ -4,7 +4,7 @@
             <renderer class="renderer">
                 <perspective-camera-control></perspective-camera-control>
                 <scene>
-                    <mesh>
+                    <mesh @click.native="alert('click')">
                         <box-geometry 
                             :width="width" 
                             :height="height" 
@@ -75,7 +75,7 @@
         },
         methods: {
             alert: function(str) {
-                console.log(str);
+                alert(str);
             }
         }
     }

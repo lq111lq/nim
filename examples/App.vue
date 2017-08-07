@@ -16,6 +16,10 @@
                         <el-menu-item-group title="texture">
                             <el-menu-item index="TextureTest">TextureTest</el-menu-item>
                         </el-menu-item-group>
+                        <el-menu-item-group title="sprite">
+                            <el-menu-item index="SpriteTest">SpriteTest</el-menu-item>
+                        </el-menu-item-group>
+                        
                     </el-submenu>
                     <el-submenu index="2">
                         <template slot="title">demo</template>

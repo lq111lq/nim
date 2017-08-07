@@ -26,7 +26,7 @@
         name: 'LineTest',
         data: function() {
             return {
-                vertices:'0 0 0 0 10 0'
+                vertices:'0 0 0 0 10 0 0 10 10'
             }
         },
         methods: {
