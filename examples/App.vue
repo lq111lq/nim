@@ -4,11 +4,22 @@
             <el-col :span="4" style="height: 100%;overflow-y: auto;overflow-x:hidden;">
                 <el-menu default-active="2" theme="dark" @select="handelSelect" style="height: 100%;">
                     <el-submenu index="1">
-                        <template slot="title">基础</template>
-                        <el-menu-item-group title="分组一">
-                            <el-menu-item index="helloWorld">helloWorld</el-menu-item>
-                            <el-menu-item index="cube">cube</el-menu-item>
+                        <template slot="title">basics</template>
+                        <el-menu-item-group title="Geometry">
+                            <!--<el-menu-item index="helloWorld">helloWorld</el-menu-item>-->
+                            <el-menu-item index="BoxGeometryTest">BoxGeometryTest</el-menu-item>
+                            <el-menu-item index="SphereGeometryTest">SphereGeometryTest</el-menu-item>
                         </el-menu-item-group>
+                        <el-menu-item-group title="Line">
+                            <el-menu-item index="LineTest">LineTest</el-menu-item>
+                        </el-menu-item-group>
+                        <el-menu-item-group title="texture">
+                            <el-menu-item index="TextureTest">TextureTest</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <el-submenu index="2">
+                        <template slot="title">demo</template>
+                        <el-menu-item index="Cubo">Cubo</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-col>

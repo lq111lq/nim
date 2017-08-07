@@ -16,11 +16,16 @@
             }
         },
         props: {
-            control: Function
+            clearColor: String
         },
         watch: {
             w: 'resize',
-            h: 'resize'
+            h: 'resize',
+            clearColor:function() {
+                if(this.renderer) {
+                    this.renderer.setClearColor(this.clearColor, 1);
+                }
+            }
         },
         beforeMount: function() {
             var $el = $(this.$el);
@@ -32,8 +37,10 @@
             var $el = $(this.$el);
 
             this.renderer = new THREE.WebGLRenderer({
-                antialias: true
+                antialias: true               
             });
+            this.renderer.setClearColor(this.clearColor, 1);
+            
             this.renderer.domElement.style.display = "block";
             this.$el.appendChild(this.renderer.domElement);
 

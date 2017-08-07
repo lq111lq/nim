@@ -12,11 +12,17 @@ nim.install = function(Vue, options) {
     Vue.component('scene',require('./component/scenes/Scene.vue'));
     
     Vue.component('mesh',require('./component/objects/Mesh.vue'));
+    Vue.component('n-line',require('./component/objects/Line.vue'));
     
     Vue.component('mesh-basic-material',require('./component/materials/MeshBasicMaterial.vue'));
+    Vue.component('line-basic-material',require('./component/materials/LineBasicMaterial.vue'));
     
+    Vue.component('texture',require('./component/textures/Texture.vue'));
+    
+    Vue.component('geometry',require('./component/geometries/Geometry.vue'));
     Vue.component('cone-geometry',require('./component/geometries/ConeGeometry.vue'));
     Vue.component('box-geometry',require('./component/geometries/BoxGeometry.vue'));
+    Vue.component('sphere-geometry',require('./component/geometries/SphereGeometry.vue'));
     
     Vue.component('cube',require('./component/Cube.vue'));
     Vue.component('grid-helper',require('./component/GridHelper.vue'));

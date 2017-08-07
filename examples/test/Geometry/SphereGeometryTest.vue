@@ -5,14 +5,7 @@
                 <perspective-camera-control></perspective-camera-control>
                 <scene>
                     <mesh>
-                        <box-geometry 
-                            :width="width" 
-                            :height="height" 
-                            :depth="depth"
-                            :widthSegments="widthSegments"
-                            :heightSegments="heightSegments"
-                            :depthSegments="depthSegments"
-                        ></box-geometry>
+                        <sphere-geometry :radius="radius" :widthSegments="widthSegments" :heightSegments="heightSegments" :phiStart="phiStart" :phiLength="phiLength" :thetaStart="thetaStart" :thetaLength="thetaLength"></sphere-geometry>
                         <mesh-basic-material :wireframe="wireframe"></mesh-basic-material>
                     </mesh>
                     <grid-helper :size="100" :divisions="100"></grid-helper>
@@ -22,18 +15,10 @@
         <el-col :span="12" style="height: 100%;padding: 10px;">
             <el-card class="box-card">
                 <div class="block">
-                    <span>width</span>
-                    <el-slider class="input" v-model="width"></el-slider>
+                    <span>radius</span>
+                    <el-slider class="input" v-model="radius"></el-slider>
                 </div>
-                <div class="block">
-                    <span>height</span>
-                    <el-slider class="input" v-model="height"></el-slider>
-                </div>
-                <div class="block">
-                    <span>depth</span>
-                    <el-slider class="input" v-model="depth"></el-slider>
-                </div>
-                
+
                 <div class="block">
                     <el-checkbox class="input-inline" v-model="wireframe">wireframe</el-checkbox>
                 </div>
@@ -47,9 +32,22 @@
                     <el-slider class="input" v-model="heightSegments"></el-slider>
                 </div>
                 <div class="block" v-if="wireframe">
-                    <span>depthSegments</span>
-                    <el-slider class="input" v-model="depthSegments"></el-slider>
+                    <span>phiStart</span>
+                    <el-slider class="input" v-model="phiStart" :min="0" :max="Math.PI * 2" :step="Math.PI/180"></el-slider>
                 </div>
+                <div class="block" v-if="wireframe">
+                    <span>phiLength</span>
+                    <el-slider class="input" v-model="phiLength" :min="0" :max="Math.PI * 2" :step="Math.PI/180"></el-slider>
+                </div>
+                <div class="block" v-if="wireframe">
+                    <span>thetaStart</span>
+                    <el-slider class="input" v-model="thetaStart" :min="0" :max="Math.PI * 2" :step="Math.PI/180"></el-slider>
+                </div>
+                <div class="block" v-if="wireframe">
+                    <span>thetaLength</span>
+                    <el-slider class="input" v-model="thetaLength" :min="0" :max="Math.PI" :step="Math.PI/180"></el-slider>
+                </div>
+
             </el-card>
         </el-col>
 
@@ -58,19 +56,19 @@
 
 <script>
     module.exports = {
-        name: 'app',
+        name: 'SphereGeometryTest',
         data: function() {
             return {
-                width: 1,
-                height: 1,
-                depth: 1,
+                radius: 1,
+                
+                widthSegments: 8,
+                heightSegments: 6,
+                phiStart: 0,
+                phiLength: Math.PI * 2,
+                thetaStart: 0,
+                thetaLength: Math.PI,
 
-                widthSegments: 1,
-                heightSegments: 1,
-                depthSegments: 1,
-
-                wireframe: false,
-                color: '#00ff40'
+                wireframe: false
             }
         },
         methods: {
