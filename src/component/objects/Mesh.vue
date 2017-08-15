@@ -7,27 +7,29 @@
     module.exports = {
         name: 'Mesh',
         extends: require('../core/Object3D.vue'),
-        data:function() {
+        data: function() {
             return {
-                geometry:null,
-                material:null
+                geometry: null,
+                material: null
             }
         },
-        watch:{
-             geometry:function(geometry) {
+        watch: {
+            geometry: function(geometry) {
                 if(this.object3D) {
                     this.object3D.geometry = geometry;
                 }
-             },
-             material:function(material) {
+            },
+            material: function(material) {
                 if(this.object3D) {
                     this.object3D.material = material;
                 }
-             }
+            }
         },
         mounted: function() {
             var mesh = new THREE.Mesh();
-            
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+
             this.object3D = mesh;
             this.$emit('object3DCreated');
         },

@@ -1,3 +1,10 @@
+var TWEEN = require('@tweenjs/tween.js');
+function animate(time) {
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+}
+requestAnimationFrame(animate);
+
 var Vue = require('vue');
 var App = require('./App.vue');
 var nim = require('src/index.js');
@@ -12,15 +19,15 @@ Vue.use(VueRouter)
 var routes = [
   { path: '/helloWorld', component: require('./test/helloWorld.vue') },
   { path: '/BoxGeometryTest', component: require('./test/Geometry/BoxGeometryTest.vue') },
-  { path: '/SphereGeometryTest', component: require('./test/Geometry/SphereGeometryTest.vue') },
-  
+  { path: '/SphereGeometryTest', component: require('./test/Geometry/SphereGeometryTest.vue') }, 
   { path: '/LineTest', component: require('./test/line/LineTest.vue') },
-  
   { path: '/TextureTest', component: require('./test/texture/TextureTest.vue') },
-  
   { path: '/SpriteTest', component: require('./test/sprite/SpriteTest.vue') },
+  { path: '/LightTest', component: require('./test/light/LightTest.vue') },
   
   { path: '/Cubo', component: require('./demo/Cubo.vue') },
+  
+  { path: '/pointsTool', component: require('./tool/pointsTool.vue') },
   
   { path: '*', redirect: '/helloWorld'}
 ]

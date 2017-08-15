@@ -2,20 +2,24 @@
     <el-row style="height: 100%;">
         <el-col :span="24" style="height: 100%;padding: 10px;">
             <renderer class="renderer" clearColor="#FFFFFF">
-                <perspective-camera-control></perspective-camera-control>
+                <orthographic-camera-control></orthographic-camera-control>
                 <scene>
+                    <point-light intensity="0.6" color="#ffffff" positionX="2" positionY="10" positionZ="-2"></point-light>
+                    <point-light intensity="0.4" color="#ffffff" positionX="2" positionY="5" positionZ="2"></point-light>
+                    <ambient-light intensity="0.6" color="#ffffff"></ambient-light>
+
                     <n-line>
-                        <geometry vertices="0 0 0 0 10 0"></geometry>
+                        <geometry vertices="0 0 0 0 5 0"></geometry>
                         <line-basic-material color="#888888"></line-basic-material>
                     </n-line>
 
                     <n-line>
-                        <geometry vertices="0 0 -10 0 0 10"></geometry>
+                        <geometry vertices="0 0 -5 0 0 5"></geometry>
                         <line-basic-material color="#888888"></line-basic-material>
                     </n-line>
 
                     <n-line>
-                        <geometry vertices="0 0 0 10 0 0"></geometry>
+                        <geometry vertices="0 0 0 5 0 0"></geometry>
                         <line-basic-material color="#888888"></line-basic-material>
                     </n-line>
 
@@ -25,54 +29,57 @@
                         </sprite-material>
                     </sprite>
 
-                    <sprite positionY="2" positionX="-1">
+                    <sprite positionY="1" positionX="-1">
                         <sprite-material>
                             <texture slot="map" ref="scale_10"></texture>
                         </sprite-material>
                     </sprite>
 
-                    <sprite positionY="4" positionX="-1">
+                    <sprite positionY="2" positionX="-1">
                         <sprite-material>
                             <texture slot="map" ref="scale_20"></texture>
                         </sprite-material>
                     </sprite>
 
-                    <sprite positionY="6" positionX="-1">
+                    <sprite positionY="3" positionX="-1">
                         <sprite-material>
                             <texture slot="map" ref="scale_30"></texture>
                         </sprite-material>
                     </sprite>
 
-                    <sprite positionY="8" positionX="-1">
+                    <sprite positionY="4" positionX="-1">
                         <sprite-material>
                             <texture slot="map" ref="scale_40"></texture>
                         </sprite-material>
                     </sprite>
 
-                    <sprite positionY="10" positionX="-1">
+                    <sprite positionY="5" positionX="-1">
                         <sprite-material>
                             <texture slot="map" ref="scale_50"></texture>
                         </sprite-material>
                     </sprite>
 
-                    <mesh v-for="c,i in array" :positionX="(i%10)*1 + 0.5" :positionZ="~~(i/10)*1 + 0.5 - 5" :positionY="0.5*c.value" v-if="Number(c.value)>0">
-                        <box-geometry width="1" :height="c.value" depth="1"></box-geometry>
-                        <mesh-basic-material color="#00ffff"></mesh-basic-material>
+                    <mesh v-for="c,i in array" :positionX="(i%10)*1 + 0.4" :positionZ="~~(i/10)*1 + 0.6 - 5" :positionY="0.5*c.value" :scaleY="c.value" v-if="Number(c.value)>0">
+                        <box-geometry width="0.8" :height="1" depth="0.8"></box-geometry>
+                        <mesh-phong-material color="#00ddff"></mesh-phong-material>
                     </mesh>
                 </scene>
             </renderer>
-            <div class="card">
-                <div style="width: 300px;height: 300px;">
+            <div class="card" style="display:none ;">
+                <div style="width: 500px;height: 500px;;">
                     <div class="cell" v-for="c in array">
-                        <input type="number" v-model="c.value"/>
+                        <input type="number" v-model="c.value" />
                     </div>
                 </div>
+                <div style="width: 500px;">{{JSON.stringify(array)}}</div>
             </div>
         </el-col>
     </el-row>
 </template>
 
 <script>
+    var TWEEN = require('@tweenjs/tween.js');
+    var toArray = require('./array.json');
     module.exports = {
         name: 'Cubo',
         data: function() {
@@ -80,7 +87,7 @@
 
             for(var i = 0; i < 100; i++) {
                 array.push({
-                    value: ~~(Math.random()*10)
+                    value: 0
                 });
             }
 
@@ -94,7 +101,7 @@
             }
         },
         mounted: function() {
-
+            var self = this;
             function draw(name) {
                 var canvas = document.createElement('canvas');
                 var context = canvas.getContext('2d');
@@ -107,7 +114,7 @@
                 context.clearRect(0, 0, canvas.width, canvas.height);
 
                 context.lineWidth = 1;
-                context.font = "500 256px SimHei";
+                context.font = "500 128px SimHei";
                 context.textAlign = 'center';
                 context.textBaseline = 'middle';
                 context.fillStyle = "#000000";
@@ -135,6 +142,25 @@
             var canvas = draw('50');
             this.$refs.scale_50.setCanvas(canvas);
 
+            var from = {
+                v: 0
+            }
+
+            new TWEEN.Tween(from)
+                .to({
+                    v: 1
+                }, 2000)
+                .onUpdate(function() {
+                    var array = toArray.map(function(d){
+                        return {
+                            value:d.value * from.v
+                        }
+                    });
+                    
+                    self.array = array;
+                })
+                .delay(500)
+                .start();
         }
     }
 </script>
@@ -187,6 +213,7 @@
         box-sizing: border-box;
         overflow: hidden;
     }
+    
     .cell input {
         width: 100%;
         height: 100%;

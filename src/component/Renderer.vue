@@ -21,7 +21,7 @@
         watch: {
             w: 'resize',
             h: 'resize',
-            clearColor:function() {
+            clearColor: function() {
                 if(this.renderer) {
                     this.renderer.setClearColor(this.clearColor, 1);
                 }
@@ -37,10 +37,12 @@
             var $el = $(this.$el);
 
             this.renderer = new THREE.WebGLRenderer({
-                antialias: true               
+                antialias: true
             });
+            this.renderer.shadowMap.enabled = true;
+            this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
             this.renderer.setClearColor(this.clearColor, 1);
-            
+
             this.renderer.domElement.style.display = "block";
             this.$el.appendChild(this.renderer.domElement);
 
@@ -68,11 +70,11 @@
                 event.preventDefault();
 
                 var mouse = new THREE.Vector2();
-                
+
                 var offset = $(self.$el).offset();
 
-                mouse.x = ((event.clientX-offset.left) / width) * 2 - 1;
-                mouse.y = -((event.clientY-offset.top) / height) * 2 + 1;
+                mouse.x = ((event.clientX - offset.left) / width) * 2 - 1;
+                mouse.y = -((event.clientY - offset.top) / height) * 2 + 1;
 
                 raycaster.setFromCamera(mouse, self.camera);
 
@@ -103,8 +105,8 @@
 
                 var offset = $(self.$el).offset();
 
-                mouse.x = ((event.clientX-offset.left) / width) * 2 - 1;
-                mouse.y = -((event.clientY-offset.top) / height) * 2 + 1;
+                mouse.x = ((event.clientX - offset.left) / width) * 2 - 1;
+                mouse.y = -((event.clientY - offset.top) / height) * 2 + 1;
 
                 raycaster.setFromCamera(mouse, self.camera);
 
@@ -115,7 +117,7 @@
                 });
 
                 var intersects = raycaster.intersectObjects(allVisibleObjects, true);
-                
+
                 var ids = [];
                 intersects.forEach(function(intersect) {
                     if(ids.indexOf(intersect.object.id) === -1) {

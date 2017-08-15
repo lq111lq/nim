@@ -8,14 +8,22 @@ nim.install = function(Vue, options) {
     
     Vue.component('perspective-camera',require('./component/cameras/PerspectiveCamera.vue'));
     Vue.component('perspective-camera-control',require('./component/cameras/PerspectiveCameraHasControl.vue'));
+    Vue.component('orthographic-camera-control',require('./component/cameras/OrthographicCameraHasControl.vue'));
+    
      
     Vue.component('scene',require('./component/scenes/Scene.vue'));
     
     Vue.component('mesh',require('./component/objects/Mesh.vue'));
+    Vue.component('points',require('./component/objects/Points.vue'));
     Vue.component('sprite',require('./component/objects/Sprite.vue'));
     Vue.component('n-line',require('./component/objects/Line.vue'));
     
+    Vue.component('directional-light',require('./component/lights/DirectionalLight.vue'));
+    Vue.component('point-light',require('./component/lights/PointLight.vue'));
+    Vue.component('ambient-light',require('./component/lights/AmbientLight.vue'));
+    
     Vue.component('mesh-basic-material',require('./component/materials/MeshBasicMaterial.vue'));
+    Vue.component('mesh-phong-material',require('./component/materials/MeshPhongMaterial.vue'));
     Vue.component('line-basic-material',require('./component/materials/LineBasicMaterial.vue'));
     Vue.component('sprite-material',require('./component/materials/SpriteMaterial.vue'));
     
