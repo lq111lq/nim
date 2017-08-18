@@ -23,13 +23,18 @@
                             <el-menu-item index="LightTest">LightTest</el-menu-item>
                             <el-menu-item index="ShadowTest">ShadowTest</el-menu-item>
                         </el-menu-item-group>
+                        <el-menu-item-group title="light">
+                            <template slot="title">PointsTest</template>
+                            <el-menu-item index="PointsTest">PointsTest</el-menu-item>
+                        </el-menu-item-group>
+
                     </el-submenu>
-                    
+
                     <el-submenu index="2">
                         <template slot="title">demo</template>
                         <el-menu-item index="Cubo">Cubo</el-menu-item>
                     </el-submenu>
-                    
+
                     <el-submenu index="3">
                         <template slot="title">pointsTool</template>
                         <el-menu-item index="pointsTool">pointsTool</el-menu-item>

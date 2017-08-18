@@ -26,9 +26,11 @@ nim.install = function(Vue, options) {
     Vue.component('mesh-phong-material',require('./component/materials/MeshPhongMaterial.vue'));
     Vue.component('line-basic-material',require('./component/materials/LineBasicMaterial.vue'));
     Vue.component('sprite-material',require('./component/materials/SpriteMaterial.vue'));
+    Vue.component('points-material',require('./component/materials/PointsMaterial.vue'));
     
     Vue.component('texture',require('./component/textures/Texture.vue'));
     
+    Vue.component('buffer-geometry',require('./component/geometries/BufferGeometry.vue'));
     Vue.component('geometry',require('./component/geometries/Geometry.vue'));
     Vue.component('cone-geometry',require('./component/geometries/ConeGeometry.vue'));
     Vue.component('box-geometry',require('./component/geometries/BoxGeometry.vue'));

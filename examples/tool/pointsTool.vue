@@ -11,9 +11,9 @@
                     <directional-light :intensity="directionalLightIntensity" :color="directionalLightColor" positionY="150"></directional-light>
                     <directional-light :intensity="directionalLightIntensity" :color="directionalLightColor" positionY="-150"></directional-light>
                     <ambient-light :color="ambientLightColor" :intensity="ambientLightIntensity"></ambient-light>
-                    <points :positions="particles.position" :colors="particles.colors"></points>
-                    <points :positions="ringParticles.position" :colors="ringParticles.colors" :rotationX="Math.PI*(45/180)"></points>
-                    <points :positions="ringParticles.position" :colors="ringParticles.colors" :rotationZ="Math.PI*(45/180)"></points>
+                    <points-t :positions="particles.position" :colors="particles.colors"></points-t>
+                    <points-t :positions="ringParticles.position" :colors="ringParticles.colors" :rotationX="Math.PI*(45/180)"></points-t>
+                    <points-t :positions="ringParticles.position" :colors="ringParticles.colors" :rotationZ="Math.PI*(45/180)"></points-t>
                     <glow></glow>
                     <!--<grid-helper :size="100" :divisions="100"></grid-helper>-->
                 </scene>
@@ -35,6 +35,9 @@
                     <span>ambientLightColor:{{ambientLightColor}}</span>
                     <input type="color" v-model="ambientLightColor" />
                 </div>
+                <div v-if="points.length" class="block">
+                    <el-button @click.native="download">download points.json</el-button>
+                </div>
                 <!--{{particles}}-->
                 <canvas ref="canvas" width="960" height="480" style="display: none;"></canvas>
                 <canvas ref="canvas_2" width="960" height="480" style="display: none;"></canvas>
@@ -46,6 +49,22 @@
 <script>
     var d3 = require('d3');
     var d3gp = require('d3-geo-projection');
+
+    function downloadFile(fileName, content) {
+        var aLink = document.createElement('a');
+        var blob = new Blob([content]);
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent("click", false, false); //initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+        aLink.download = fileName;
+        aLink.href = URL.createObjectURL(blob);
+
+        document.body.appendChild(aLink);
+        aLink.innerHTML = "click";
+
+        aLink.dispatchEvent(evt);
+        aLink.click();
+    }
+    
     module.exports = {
         name: 'pointsTool',
         data: function() {
@@ -110,9 +129,9 @@
                 var colors = new Float32Array(particleCount * 3);
 
                 for(var i = 0; i < particleCount; i++) {
-                    var r = 120 + Math.random()*5;
+                    var r = 120 + Math.random() * 5;
                     var lat = 0;
-                    var lng = -180 + 360 * (i/particleCount);
+                    var lng = -180 + 360 * (i / particleCount);
 
                     var y = Math.sin(Math.PI * lat / 180) * r;
                     var r0 = Math.cos(Math.PI * lat / 180) * r;
@@ -121,7 +140,7 @@
                     var z = Math.cos(Math.PI * lng / 180) * r0;
 
                     particlePositions[i * 3] = x;
-                    particlePositions[i * 3 + 1] = y + Math.random()*5 ;
+                    particlePositions[i * 3 + 1] = y + Math.random() * 5;
                     particlePositions[i * 3 + 2] = z;
 
                     colors[i * 3 + 0] = 0.8;
@@ -196,11 +215,11 @@
                         var g = data[i + 1];
                         var b = data[i + 2];
                         var a = data[i + 3];
-                        
-//                      var r0 = Math.cos(Math.PI * lat / 180);
-//                        var p = 4 + ~~((1-r0 * r0)*15);
+
+                        //                      var r0 = Math.cos(Math.PI * lat / 180);
+                        //                        var p = 4 + ~~((1-r0 * r0)*15);
                         var p = 4;
-                        
+
                         if(r === 180 && x % p === 0 && y % 4 === 0) {
 
                             context_2.fillStyle = 'rgba(180,0, 0, 1)';
@@ -226,11 +245,14 @@
 
                     self.points = points;
                 });
+            },
+            download: function() {
+                downloadFile('points.json', JSON.stringify(this.points))
             }
         },
         components: {
-            'glow': require('./glow.vue')
-
+            'glow': require('./glow.vue'),
+            'points-t': require('./Points.vue')
         }
     }
 </script>

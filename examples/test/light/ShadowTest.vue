@@ -24,11 +24,11 @@
             <el-card class="box-card">
                 <div class="block">
                     <span>pointLightIntensity</span>
-                    <el-slider class="input" v-model="pointLightIntensity" step="0.1" max="1"></el-slider>
+                    <el-slider class="input" v-model="pointLightIntensity" :step="0.1" :max="1"></el-slider>
                 </div>
                 <div class="block">
                     <span>ambientLightIntensity</span>
-                    <el-slider class="input" v-model="ambientLightIntensity"  step="0.1" max="1"></el-slider>
+                    <el-slider class="input" v-model="ambientLightIntensity"  :step="0.1" :max="1"></el-slider>
                 </div>
                 <div class="block">
                     <span>materialColor</span>
@@ -50,7 +50,7 @@
 
 <script>
     module.exports = {
-        name: 'ShadowTest.vue',
+        name: 'ShadowTest',
         data: function() {
             return {
                 shadow: true,
