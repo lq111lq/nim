@@ -21,6 +21,7 @@
                         </el-menu-item-group>
                         <el-menu-item-group title="light">
                             <el-menu-item index="LightTest">LightTest</el-menu-item>
+                            <el-menu-item index="ShadowTest">ShadowTest</el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>
                     

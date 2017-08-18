@@ -18,6 +18,10 @@
             intensity: {
                 type: [Number, String],
                 default: 1
+            },
+            shadow: {
+                type: Object,
+                default: null
             }
         },
         watch: {
@@ -35,10 +39,11 @@
         mounted: function() {
             var light = new THREE.PointLight(new THREE.Color(this.color), Number(this.intensity), 0);
             light.castShadow = true;
-            light.shadow.mapSize.width = 2048; // default
-            light.shadow.mapSize.height = 2048; // default
-            light.shadow.camera.near = 0.5; // default
-            light.shadow.camera.far = 500 // default
+            this.shadow = this.shadow;
+//          light.shadow.mapSize.width = 2048; // default
+//          light.shadow.mapSize.height = 2048; // default
+//          light.shadow.camera.near = 0.5; // default
+//          light.shadow.camera.far = 500 // default
             this.object3D = light;
             this.$emit('object3DCreated');
         },

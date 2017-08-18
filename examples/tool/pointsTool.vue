@@ -12,6 +12,8 @@
                     <directional-light :intensity="directionalLightIntensity" :color="directionalLightColor" positionY="-150"></directional-light>
                     <ambient-light :color="ambientLightColor" :intensity="ambientLightIntensity"></ambient-light>
                     <points :positions="particles.position" :colors="particles.colors"></points>
+                    <points :positions="ringParticles.position" :colors="ringParticles.colors" :rotationX="Math.PI*(45/180)"></points>
+                    <points :positions="ringParticles.position" :colors="ringParticles.colors" :rotationZ="Math.PI*(45/180)"></points>
                     <glow></glow>
                     <!--<grid-helper :size="100" :divisions="100"></grid-helper>-->
                 </scene>
@@ -99,6 +101,44 @@
                 };
 
                 return particles;
+            },
+
+            ringParticles: function() {
+
+                var particleCount = 90;
+                var particlePositions = new Float32Array(particleCount * 3);
+                var colors = new Float32Array(particleCount * 3);
+
+                for(var i = 0; i < particleCount; i++) {
+                    var r = 120 + Math.random()*5;
+                    var lat = 0;
+                    var lng = -180 + 360 * (i/particleCount);
+
+                    var y = Math.sin(Math.PI * lat / 180) * r;
+                    var r0 = Math.cos(Math.PI * lat / 180) * r;
+
+                    var x = Math.sin(Math.PI * lng / 180) * r0;
+                    var z = Math.cos(Math.PI * lng / 180) * r0;
+
+                    particlePositions[i * 3] = x;
+                    particlePositions[i * 3 + 1] = y + Math.random()*5 ;
+                    particlePositions[i * 3 + 2] = z;
+
+                    colors[i * 3 + 0] = 0.8;
+                    colors[i * 3 + 1] = 0.9;
+                    colors[i * 3 + 2] = 1.0;
+                }
+
+                var particles = {
+                    position: particlePositions.toString().split(',').map(function(d) {
+                        return Number(d)
+                    }),
+                    colors: colors.toString().split(',').map(function(d) {
+                        return Number(d)
+                    })
+                };
+
+                return particles;
             }
         },
         mounted: function() {
@@ -156,8 +196,12 @@
                         var g = data[i + 1];
                         var b = data[i + 2];
                         var a = data[i + 3];
-
-                        if(r === 180 && x % 4 === 0 && y % 4 === 0) {
+                        
+//                      var r0 = Math.cos(Math.PI * lat / 180);
+//                        var p = 4 + ~~((1-r0 * r0)*15);
+                        var p = 4;
+                        
+                        if(r === 180 && x % p === 0 && y % 4 === 0) {
 
                             context_2.fillStyle = 'rgba(180,0, 0, 1)';
                             context_2.fillRect(x - 0.5, y - 0.5, 1, 1);
@@ -168,7 +212,7 @@
                             })
                         }
 
-                        if(b === 180 && x % 4 === 0 && y % 4 === 0) {
+                        if(b === 180 && x % p === 0 && y % 4 === 0) {
 
                             context_2.fillStyle = 'rgba(0,180, 180, 1)';
                             context_2.fillRect(x - 0.5, y - 0.5, 1, 1);

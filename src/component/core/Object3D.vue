@@ -9,7 +9,8 @@
         mixins: [
             require('./mixin/position.js'),
             require('./mixin/rotation.js'),
-            require('./mixin/scale.js')
+            require('./mixin/scale.js'),
+            require('./mixin/shadow.js')
         ],
         data: function() {
             return {

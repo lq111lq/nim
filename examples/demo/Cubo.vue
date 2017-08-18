@@ -4,8 +4,8 @@
             <renderer class="renderer" clearColor="#FFFFFF">
                 <orthographic-camera-control></orthographic-camera-control>
                 <scene>
-                    <point-light intensity="0.6" color="#ffffff" positionX="2" positionY="10" positionZ="-2"></point-light>
-                    <point-light intensity="0.4" color="#ffffff" positionX="2" positionY="5" positionZ="2"></point-light>
+                    <point-light :castShadow="true" intensity="0.6" color="#ffffff" positionX="2" positionY="10" positionZ="-2"></point-light>
+                    <point-light :castShadow="true" intensity="0.4" color="#ffffff" positionX="2" positionY="5" positionZ="2"></point-light>
                     <ambient-light intensity="0.6" color="#ffffff"></ambient-light>
 
                     <n-line>
@@ -59,7 +59,7 @@
                         </sprite-material>
                     </sprite>
 
-                    <mesh v-for="c,i in array" :positionX="(i%10)*1 + 0.4" :positionZ="~~(i/10)*1 + 0.6 - 5" :positionY="0.5*c.value" :scaleY="c.value" v-if="Number(c.value)>0">
+                    <mesh v-for="c,i in array" :castShadow="true" :receiveShadow="true" :positionX="(i%10)*1 + 0.4" :positionZ="~~(i/10)*1 + 0.6 - 5" :positionY="0.5*c.value" :scaleY="c.value" v-if="Number(c.value)>0">
                         <box-geometry width="0.8" :height="1" depth="0.8"></box-geometry>
                         <mesh-phong-material color="#00ddff"></mesh-phong-material>
                     </mesh>

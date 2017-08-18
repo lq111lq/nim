@@ -23,21 +23,7 @@
             }
         },
         watch: {
-            positionX: function(value) {
-                if(this.object3D) {
-                    this.object3D.position.x = Number(value);
-                }
-            },
-            positionY: function(value) {
-                if(this.object3D) {
-                    this.object3D.position.y = Number(value);
-                }
-            },
-            positionZ: function(value) {
-                if(this.object3D) {
-                    this.object3D.position.z = Number(value);
-                }
-            }
+            //props 仅用于初始化
         },
         mounted: function() {
             var $parentEl = $(this.$parent.$el);
@@ -45,11 +31,15 @@
             var h = $parentEl.height();
 
             var camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-            
+
             camera.position.x = Number(this.positionX);
             camera.position.y = Number(this.positionY);
             camera.position.z = Number(this.positionZ);
-            
+
+            if(Number(this.positionX) === 0 && Number(this.positionY) === 0 && Number(this.positionZ) === 0) {
+                camera.position.z = 0.1;
+            }
+
             this.object3D = camera;
             this.$parent.camera = camera;
 

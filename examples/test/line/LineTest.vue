@@ -2,7 +2,7 @@
     <el-row style="height: 100%;">
         <el-col :span="12" style="height: 100%;padding: 10px;">
             <renderer class="renderer">
-                <perspective-camera-control></perspective-camera-control>
+                <perspective-camera-control positionZ="10" positionY="10"></perspective-camera-control>
                 <scene>
                     <n-line>
                         <geometry :vertices="vertices"></geometry>
@@ -26,7 +26,7 @@
         name: 'LineTest',
         data: function() {
             return {
-                vertices:'0 0 0 0 10 0 0 10 10'
+                vertices:'0 0 0 0 5 0 5 5 0'
             }
         },
         methods: {

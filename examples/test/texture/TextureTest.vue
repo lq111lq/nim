@@ -2,7 +2,7 @@
     <el-row style="height: 100%;">
         <el-col :span="12" style="height: 100%;padding: 10px;">
             <renderer class="renderer">
-                <perspective-camera-control></perspective-camera-control>
+                <perspective-camera-control positionZ="10" positionY="10"></perspective-camera-control>
                 <scene>
                     <mesh positionX="5">
                         <box-geometry :width="5" :height="5" :depth="5"></box-geometry>

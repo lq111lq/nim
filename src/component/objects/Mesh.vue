@@ -27,8 +27,8 @@
         },
         mounted: function() {
             var mesh = new THREE.Mesh();
-            mesh.castShadow = true;
-            mesh.receiveShadow = true;
+            //mesh.castShadow = true;
+            //mesh.receiveShadow = true;
 
             this.object3D = mesh;
             this.$emit('object3DCreated');

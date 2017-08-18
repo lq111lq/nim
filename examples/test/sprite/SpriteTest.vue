@@ -2,7 +2,7 @@
     <el-row style="height: 100%;">
         <el-col :span="12" style="height: 100%;padding: 10px;">
             <renderer class="renderer">
-                <perspective-camera-control></perspective-camera-control>
+                <perspective-camera-control positionZ="10" positionY="10"></perspective-camera-control>
                 <scene>
                     <sprite positionX="2">
                         <sprite-material>

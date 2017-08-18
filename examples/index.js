@@ -24,6 +24,7 @@ var routes = [
   { path: '/TextureTest', component: require('./test/texture/TextureTest.vue') },
   { path: '/SpriteTest', component: require('./test/sprite/SpriteTest.vue') },
   { path: '/LightTest', component: require('./test/light/LightTest.vue') },
+  { path: '/ShadowTest', component: require('./test/light/ShadowTest.vue') },
   
   { path: '/Cubo', component: require('./demo/Cubo.vue') },
   

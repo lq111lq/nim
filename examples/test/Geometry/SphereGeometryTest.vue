@@ -2,7 +2,7 @@
     <el-row style="height: 100%;">
         <el-col :span="12" style="height: 100%;padding: 10px;">
             <renderer class="renderer">
-                <perspective-camera-control></perspective-camera-control>
+                <perspective-camera-control positionZ="10" positionY="10"></perspective-camera-control>
                 <scene>
                     <mesh>
                         <sphere-geometry :radius="radius" :widthSegments="widthSegments" :heightSegments="heightSegments" :phiStart="phiStart" :phiLength="phiLength" :thetaStart="thetaStart" :thetaLength="thetaLength"></sphere-geometry>
