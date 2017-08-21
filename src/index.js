@@ -17,6 +17,7 @@ nim.install = function(Vue, options) {
     Vue.component('points',require('./component/objects/Points.vue'));
     Vue.component('sprite',require('./component/objects/Sprite.vue'));
     Vue.component('n-line',require('./component/objects/Line.vue'));
+    Vue.component('group',require('./component/objects/Group.vue'));
     
     Vue.component('directional-light',require('./component/lights/DirectionalLight.vue'));
     Vue.component('point-light',require('./component/lights/PointLight.vue'));

@@ -1,3 +1,12 @@
+require('./postprocessing/CopyShader.js');
+require('./postprocessing/BokehShader.js');
+
+require('./postprocessing/EffectComposer.js');
+require('./postprocessing/RenderPass.js');
+require('./postprocessing/ShaderPass.js');
+require('./postprocessing/MaskPass.js');
+require('./postprocessing/BokehPass.js');
+
 var TWEEN = require('@tweenjs/tween.js');
 function animate(time) {
     requestAnimationFrame(animate);
@@ -27,11 +36,12 @@ var routes = [
   { path: '/ShadowTest', component: require('./test/light/ShadowTest.vue') },
   { path: '/PointsTest', component: require('./test/points/PointsTest.vue') },
   
-  { path: '/Cubo', component: require('./demo/Cubo.vue') },
-  
   { path: '/pointsTool', component: require('./tool/pointsTool.vue') },
   
-  { path: '*', redirect: '/helloWorld'}
+  { path: '/Cubo', component: require('./demo/Cubo.vue') },
+  { path: '/Global', component: require('./demo/Global.vue') },
+  
+  { path: '*', redirect: '/BoxGeometryTest'}
 ]
 
 var router = new VueRouter({
