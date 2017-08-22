@@ -50,7 +50,7 @@
                 var texture = new THREE.Texture(canvas);
                 texture.needsUpdate = true;
                 
-                var oldTexture = self.texture;
+                var oldTexture = this.texture;
                 this.texture = texture;
                 this.$parent && this.$parent.$emit('updateMap');
                 

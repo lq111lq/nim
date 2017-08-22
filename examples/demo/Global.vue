@@ -11,9 +11,23 @@
                     <directional-light :intensity="0.5" color="#43419e" positionY="150"></directional-light>
                     <directional-light :intensity="0.5" color="#43419e" positionY="-150"></directional-light>
                     <glow></glow>
+
+                    <n-label v-for="l in labels" 
+                        :positionX="getPosition(l.lat,l.lng,105).x"
+                        :positionY="getPosition(l.lat,l.lng,105).y"
+                        :positionZ="getPosition(l.lat,l.lng,105).z"
+                        
+                        :lookAtX="getPosition(l.lat,l.lng,100).x"
+                        :lookAtY="getPosition(l.lat,l.lng,100).y"
+                        :lookAtZ="getPosition(l.lat,l.lng,100).z"
+                        
+                        :name = "l.name"
+                        :population = "l.population"
+                    ></n-label>
+
                     <points>
                         <buffer-geometry ref="geometry"></buffer-geometry>
-                        <points-material color="#ffffff" vertexColors="VertexColors" :sizeAttenuation="true" :size="0.5"></points-material>
+                        <points-material color="#ffffff" vertexColors="VertexColors" :sizeAttenuation="true" :size="0.4"></points-material>
                     </points>
 
                     <group :rotationX="Math.PI*(15/180)">
@@ -133,7 +147,7 @@
             var lat = 0;
             var lng = -180 + 360 * (i / particleCount);
 
-            var y = Math.sin(Math.PI * lat / 180) * r + Math.random() * 10 -5;
+            var y = Math.sin(Math.PI * lat / 180) * r + Math.random() * 10 - 5;
             var r0 = Math.cos(Math.PI * lat / 180) * r;
 
             var x = Math.sin(Math.PI * lng / 180) * r0;
@@ -159,9 +173,52 @@
     module.exports = {
         name: 'Global',
         data: function() {
+            var labels = [{
+                name: '北京',
+                lat: 39.5,
+                lng: 116.3,
+                population: 2152
+            }, {
+                name: '上海',
+                lat: 31.2,
+                lng: 120.8,
+                population: 2426
+            }, {
+                name: '广州',
+                lat: 23.11,
+                lng: 113.27,
+                population: 1350
+            }, {
+                name: '新加坡',
+                lat: 1.3,
+                lng: 103.8,
+                population: 553
+            }, {
+                name: '雅加达',
+                lat: -6.2,
+                lng: 106.8,
+                population: 850
+            }, {
+                name: '悉尼',
+                lat: -33.9,
+                lng: 156.8,
+                population: 420
+            }, {
+                name: '莫斯科',
+                lat: 55.7,
+                lng: 37.4,
+                population: 420
+            }, {
+                name: '伦敦',
+                lat: 51.5,
+                lng: 2.4,
+                population: 420
+            }];
+
             return {
                 p: 1,
                 r: 0,
+                labels: labels
             }
         },
         mounted: function() {
@@ -191,6 +248,20 @@
             this.af && window.cancelAnimationFrame(this.af);
         },
         methods: {
+            getPosition: function(lat, lng,r) {
+
+                var y = Math.sin(Math.PI * lat / 180) * r;
+                var r0 = Math.cos(Math.PI * lat / 180) * r;
+
+                var x = Math.sin(Math.PI * lng / 180) * r0;
+                var z = Math.cos(Math.PI * lng / 180) * r0;
+                
+                return {
+                    x:x,
+                    y:y,
+                    z:z
+                }
+            },
             updateAttribute: function(str) {
                 //              debugger;
                 var particleCount = points.length;
@@ -214,7 +285,8 @@
             }
         },
         components: {
-            'glow': require('./glow.vue')
+            'glow': require('./glow.vue'),
+            'n-label': require('./Label.vue')
         }
     }
 </script>

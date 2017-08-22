@@ -1,12 +1,3 @@
-require('./postprocessing/CopyShader.js');
-require('./postprocessing/BokehShader.js');
-
-require('./postprocessing/EffectComposer.js');
-require('./postprocessing/RenderPass.js');
-require('./postprocessing/ShaderPass.js');
-require('./postprocessing/MaskPass.js');
-require('./postprocessing/BokehPass.js');
-
 var TWEEN = require('@tweenjs/tween.js');
 function animate(time) {
     requestAnimationFrame(animate);
