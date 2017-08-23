@@ -12,21 +12,15 @@
                     <directional-light :intensity="0.5" color="#43419e" positionY="-150"></directional-light>
                     <glow></glow>
 
-                    <n-label v-for="l in labels" 
-                        :positionX="getPosition(l.lat,l.lng,105).x"
-                        :positionY="getPosition(l.lat,l.lng,105).y"
-                        :positionZ="getPosition(l.lat,l.lng,105).z"
-                        
-                        :lookAtX="getPosition(l.lat,l.lng,100).x"
-                        :lookAtY="getPosition(l.lat,l.lng,100).y"
-                        :lookAtZ="getPosition(l.lat,l.lng,100).z"
-                        
-                        :name = "l.name"
-                        :population = "l.population"
-                    ></n-label>
+                    <n-label v-for="l in labels" :positionX="getPosition(l.lat,l.lng,105).x" :positionY="getPosition(l.lat,l.lng,105).y" :positionZ="getPosition(l.lat,l.lng,105).z" :lookAtX="getPosition(l.lat,l.lng,100).x" :lookAtY="getPosition(l.lat,l.lng,100).y" :lookAtZ="getPosition(l.lat,l.lng,100).z" :name="l.name" :population="l.population"></n-label>
 
                     <points>
                         <buffer-geometry ref="geometry"></buffer-geometry>
+                        <points-material color="#ffffff" vertexColors="VertexColors" :sizeAttenuation="true" :size="0.4"></points-material>
+                    </points>
+                    
+                    <points>
+                        <buffer-geometry ref="geometry2"></buffer-geometry>
                         <points-material color="#ffffff" vertexColors="VertexColors" :sizeAttenuation="true" :size="0.4"></points-material>
                     </points>
 
@@ -58,6 +52,15 @@
 <script>
     var TWEEN = require('@tweenjs/tween.js');
     var points = require('../test/points/points.json');
+    var pops = [];
+    var popsS = require('./pops.js');
+
+    for(key in popsS) {
+        var value = popsS[key];
+        for(var i = 0; i < value.length; i++) {
+            pops.push(value[i]);
+        }
+    }
 
     var particles = (function() {
         var particleCount = points.length;
@@ -169,6 +172,54 @@
 
         return particles;
     })();
+    //{"pop":7188,"lat":22.3805555,"lon":114.07104492}
+    var popsParticles = (function() {
+        var particleCount = 0;
+        
+        function f(x) {
+            return ~~(Math.log(x/100000 + 1)) * 2 + 1;
+        }
+        
+        pops.forEach(function(p) {
+            particleCount += f(p.pop);
+        });
+
+        var particlePositions = new Float32Array(particleCount * 3);
+        var colors = new Float32Array(particleCount * 3);
+
+        console.log(particleCount);
+        var c = 0;
+        for(var i = 0; i < pops.length; i++) {
+            var pop = pops[i];
+            var lat = pop.lat;
+            var lng = pop.lon;
+            for(var j = 0; j < f(pop.pop); j++) {
+                c++;
+                var r = 100 + j * 1 + Math.log(j/10 + 1)*10 + pop.pop/100000;
+                
+                var y = Math.sin(Math.PI * lat / 180) * r;
+                var r0 = Math.cos(Math.PI * lat / 180) * r;
+
+                var x = Math.sin(Math.PI * lng / 180) * r0;
+                var z = Math.cos(Math.PI * lng / 180) * r0;
+
+                particlePositions[c * 3] = x;
+                particlePositions[c * 3 + 1] = y;
+                particlePositions[c * 3 + 2] = z;
+
+                colors[c * 3 + 0] = 0.3 + 0.3 * Math.log(j/10 + 1)*10;;
+                colors[c * 3 + 1] = 0.3;
+                colors[c * 3 + 2] = 0.6;
+            }
+        }
+        
+        var particles = {
+            position: particlePositions,
+            colors: colors
+        };
+
+        return particles;
+    })();
 
     module.exports = {
         name: 'Global',
@@ -228,7 +279,11 @@
             this.$refs.geometry.addAttribute('position', new Float32Array(particleCount * 3), 3, true);
             this.$refs.geometry.addAttribute('color', new Float32Array(particleCount * 3), 3, true);
             this.updateAttribute();
-
+            
+            this.$refs.geometry2.addAttribute('position', popsParticles.position, 3, true);
+            this.$refs.geometry2.addAttribute('color', popsParticles.colors, 3, true);
+            this.updateAttribute();
+            
             this.$refs.ringGeometry.addAttribute('position', ringParticles.position, 3, true);
             this.$refs.ringGeometry.addAttribute('color', ringParticles.colors, 3, true);
 
@@ -248,18 +303,18 @@
             this.af && window.cancelAnimationFrame(this.af);
         },
         methods: {
-            getPosition: function(lat, lng,r) {
+            getPosition: function(lat, lng, r) {
 
                 var y = Math.sin(Math.PI * lat / 180) * r;
                 var r0 = Math.cos(Math.PI * lat / 180) * r;
 
                 var x = Math.sin(Math.PI * lng / 180) * r0;
                 var z = Math.cos(Math.PI * lng / 180) * r0;
-                
+
                 return {
-                    x:x,
-                    y:y,
-                    z:z
+                    x: x,
+                    y: y,
+                    z: z
                 }
             },
             updateAttribute: function(str) {
