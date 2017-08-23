@@ -35,6 +35,7 @@ nim.install = function(Vue, options) {
     Vue.component('geometry',require('./component/geometries/Geometry.vue'));
     Vue.component('cone-geometry',require('./component/geometries/ConeGeometry.vue'));
     Vue.component('box-geometry',require('./component/geometries/BoxGeometry.vue'));
+    Vue.component('plane-geometry',require('./component/geometries/PlaneGeometry.vue'));
     Vue.component('sphere-geometry',require('./component/geometries/SphereGeometry.vue'));
     
     Vue.component('cube',require('./component/Cube.vue'));

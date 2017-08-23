@@ -10,11 +10,19 @@
             <line-basic-material color="#fd8c42"></line-basic-material>
         </n-line>
 
-        <sprite positionZ="-7" scaleX="12" scaleY="12" scaleZ="12">
-            <sprite-material>
-                <texture slot="map" ref="canvasTexture"></texture>
-            </sprite-material>
-        </sprite>
+        <mesh positionZ="-25" :rotationX="Math.PI" :rotationZ="Math.PI" :rotationY="0.5 * Math.PI">
+            <plane-geometry width="20" height="5">></plane-geometry>
+            <mesh-basic-material :transparent="true">
+                <texture slot="map" ref="canvasTexture"> </texture>
+            </mesh-basic-material>
+        </mesh>
+        
+        <mesh positionZ="-25" :rotationX="Math.PI" :rotationZ="Math.PI" :rotationY="-0.5 * Math.PI">
+            <plane-geometry width="20" height="5">></plane-geometry>
+            <mesh-basic-material :transparent="true">
+                <texture slot="map" ref="canvasTexture2"> </texture>
+            </mesh-basic-material>
+        </mesh>
     </group>
 </template>
 
@@ -64,7 +72,7 @@
             var self = this;
             var canvas = document.createElement('canvas');
             canvas.width = 512;
-            canvas.height = 512;
+            canvas.height = 128;
             var context = canvas.getContext('2d');
 
             this._canvas = canvas;
@@ -83,19 +91,21 @@
         methods: {
             draw: function() {
                 var canvasTexture = this.$refs.canvasTexture;
+                var canvasTexture2 = this.$refs.canvasTexture2;
 
                 var context = this._context;
                 
-                context.clearRect(0,0,512,512);
+                context.clearRect(0,0,512,128);
                 context.lineWidth = 1;
                 context.font = "900 60px SimHei";
                 context.textAlign = 'center';
                 context.textBaseline = 'middle';
                 context.fillStyle = "#fd8c42";
-                context.fillText(this.name + " " + ~~(this.population*this.t) + ' 万人', 256, 256);
-                context.strokeText(this.name + " " + ~~(this.population*this.t) + ' 万人', 256, 256);
+                context.fillText(this.name + " " + ~~(this.population*this.t) + ' 万人', 256, 64);
+                context.strokeText(this.name + " " + ~~(this.population*this.t) + ' 万人', 256, 64);
 
                 canvasTexture.setCanvas(this._canvas);
+                canvasTexture2.setCanvas(this._canvas);
             }
         }
 

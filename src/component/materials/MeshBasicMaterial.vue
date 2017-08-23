@@ -16,6 +16,10 @@
                 type: Boolean,
                 default: false
             },
+            transparent:{
+                type: Boolean,
+                default: false
+            },
             map: String
         },
         watch: {
@@ -46,6 +50,12 @@
                     this.material.wireframe = this.wireframe;
                     this.material.needsUpdate = true;
                 }
+            },
+            transparent: function() {
+                if(this.material) {
+                    this.material.transparent = this.transparent;
+                    this.material.needsUpdate = true;
+                }
             }
         },
         beforeMount: function() {
@@ -59,6 +69,7 @@
                 var material = new THREE.MeshBasicMaterial();
                 material.color = new THREE.Color(this.color);
                 material.wireframe = this.wireframe;
+                material.transparent = this.transparent;
 
                 if(this.map && this.map.startsWith('#')) {
                     var assets = this.getAssets();
