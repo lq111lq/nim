@@ -40,6 +40,12 @@ var config = {
         }, {
             test: /\.json$/,
             loader: 'json'
+        },{ 
+            test: /\.xml$/, 
+            loader: 'xml-loader' 
+        },{ 
+            test: /\.osm/, 
+            loader: 'xml-loader' 
         }]
     },
     resolve: {

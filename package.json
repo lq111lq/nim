@@ -39,7 +39,8 @@
     "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.14.0",
-    "webpack-merge": "^2.4.0"
+    "webpack-merge": "^2.4.0",
+    "xml-loader": "^1.2.1"
   },
   "dependencies": {
     "element-ui": "^1.4.1",
