@@ -1,7 +1,18 @@
 <template>
     <el-row style="height: 100%;">
         <el-col :span="24" style="height: 100%;padding: 10px;">
-            <!--<span v-for="v,k in pops">{{k}}</span>-->
+            <!--<span v-for="v,k,i in pops">{{i}}</span>-->
+            <div v-if="focus.name" style="
+                position: absolute;
+                right: 25px;
+                top: 15px;
+                color: #888888;
+                font-size: 45px;
+                text-align: right;
+            ">
+                <span>{{focus.name}}</span><br />
+                <span>{{focus.v}}</span>
+            </div>
             <canvas ref="canvas" width="3840" height="1920" style="display: none;"></canvas>
             <renderer class="renderer" clearColor="#fafafa">
                 <perspective-camera-control positionZ="200" positionY="200"></perspective-camera-control>
@@ -13,7 +24,7 @@
                         </mesh-basic-material>
                     </mesh>
 
-                    <local-label v-for="v,k in pops" :points="v.slice(0,3)"></local-label>
+                    <local-label v-if="darwed" v-for="v,k,i in pops" :points="v.slice(0,15)" :delay="i*50" @mouseenter.native="handleMouseenter(k,v)" @mouseout.native="handleMouseout(k)"></local-label>
                     <!--<grid-helper :size="100" :divisions="100"></grid-helper>-->
                 </scene>
             </renderer>
@@ -26,12 +37,17 @@
     var d3 = require('d3');
     var d3gp = require('d3-geo-projection');
     var pops = require('../pops.js');
-
+    var TWEEN = require('@tweenjs/tween.js');
     module.exports = {
         name: 'Pops_1',
         data: function() {
             return {
-                pops: pops
+                pops: pops,
+                darwed: false,
+                focus: {
+                    name: '',
+                    v: 1000
+                }
             }
         },
         methods: {
@@ -74,8 +90,20 @@
                     canvasTexture.texture.wrapT = THREE.RepeatWrapping;
                     canvasTexture.texture.repeat.set(3, 1);
                     canvasTexture.texture.needsUpdate = true;
+                    self.darwed = true;
                 });
             },
+            handleMouseenter: function(str,v) {
+                this.focus.name = str;
+                this.focus.v =  v.reduce(function(a,b){
+                    return a + b.pop
+                },0)
+            },
+            handleMouseout: function(str) {
+                if(this.focus.name === str) {
+                    this.focus.name = ''
+                }
+            }
         },
         mounted: function() {
             this.draw();

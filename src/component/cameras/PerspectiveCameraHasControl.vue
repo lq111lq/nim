@@ -30,7 +30,7 @@
             var w = $parentEl.width();
             var h = $parentEl.height();
 
-            var camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
+            var camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 100000);
 
             camera.position.x = Number(this.positionX);
             camera.position.y = Number(this.positionY);

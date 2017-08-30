@@ -4,17 +4,12 @@
             <renderer class="renderer">
                 <perspective-camera-control positionZ="10" positionY="10"></perspective-camera-control>
                 <scene>
-                    <mesh @click.native="alert('click')">
-                        <box-geometry 
-                            :width="width" 
-                            :height="height" 
-                            :depth="depth"
-                            :widthSegments="widthSegments"
-                            :heightSegments="heightSegments"
-                            :depthSegments="depthSegments"
-                        ></box-geometry>
-                        <mesh-basic-material :wireframe="wireframe"></mesh-basic-material>
-                    </mesh>
+                    <group @click.native.stop="alert('click.group')">
+                        <mesh @click.native="alert('click')">
+                            <box-geometry :width="width" :height="height" :depth="depth" :widthSegments="widthSegments" :heightSegments="heightSegments" :depthSegments="depthSegments"></box-geometry>
+                            <mesh-basic-material :wireframe="wireframe"></mesh-basic-material>
+                        </mesh>
+                    </group>
                     <grid-helper :size="100" :divisions="100"></grid-helper>
                 </scene>
             </renderer>
@@ -33,11 +28,11 @@
                     <span>depth</span>
                     <el-slider class="input" v-model="depth"></el-slider>
                 </div>
-                
+
                 <div class="block">
                     <el-checkbox class="input-inline" v-model="wireframe">wireframe</el-checkbox>
                 </div>
-                
+
                 <div class="block" v-if="wireframe">
                     <span>widthSegments</span>
                     <el-slider class="input" v-model="widthSegments"></el-slider>
