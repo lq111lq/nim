@@ -4,7 +4,7 @@
             <!--<span v-for="v,k in pops">{{k}}</span>-->
             <canvas ref="canvas" width="3840" height="1920" style="display: none;"></canvas>
             <renderer class="renderer" clearColor="#fafafa">
-                <perspective-camera-control positionZ="20" positionY="20"></perspective-camera-control>
+                <perspective-camera-control positionZ="200" positionY="200"></perspective-camera-control>
                 <scene>
                     <mesh :rotationX="-Math.PI*0.5">
                         <plane-geometry :width="960*3" height="480">></plane-geometry>
