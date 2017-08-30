@@ -8,7 +8,7 @@
                         <buffer-geometry ref="geometry"></buffer-geometry>
                         <points-material color="#00ffff" :sizeAttenuation="false" :size="1"></points-material>
                     </points>-->
-                    <way v-for="w in ways" :nodes="w.nodes"></way>
+                    <way v-for="w in ways" :nodes="w.nodes" :type="w.type"></way>
                     <!--<grid-helper :size="100" :divisions="100"></grid-helper>-->
                 </scene>
             </renderer>
@@ -21,61 +21,69 @@
 
     var particlePositions = new Float32Array(osm.node.length * 3 * 2);
     var nodes = {};
-    
+
     osm.node.forEach(function(node, i) {
-        
+
         var lat = Number(node.$.lat) - 39.9165;
         var lng = Number(node.$.lon) - 116.391;
-        
+
         var z = -lat * 10000;
         var x = lng * 10000;
         var y = 5;
-        
+
         particlePositions[i * 6] = x;
         particlePositions[i * 6 + 1] = y;
         particlePositions[i * 6 + 2] = z;
-        
+
         particlePositions[i * 6 + 3] = x;
-        particlePositions[i * 6 + 4] = y+0;
+        particlePositions[i * 6 + 4] = y + 0;
         particlePositions[i * 6 + 5] = z;
-        
+
         nodes[node.$.id] = {
-            x:x,
-            z:z
+            x: x,
+            z: z
         }
     });
-    
+
     var ways = osm.way.map(function(way, i) {
         var nds = [];
-        var building = false;
+        var type = '';
         way.nd.forEach(function(node, i) {
             nds.push(nodes[node.$.ref]);
         });
-        
+
         way.tag && way.tag.forEach(function(tag, i) {
-            if(tag.$.k==="building" && tag.$.v==="yes") {
-                building = true;
+            if(tag.$.k === "building" && tag.$.v === "yes") {
+                type = "building";
+            }
+
+            if(tag.$.k === "water" && tag.$.v === "moat") {
+                type = "water";
+            }
+
+            if(tag.$.k === "waterway" && tag.$.v === "canal") {
+                type = "waterway";
             }
         });
-        
+
         return {
-            nodes:nds,
-            building:building
+            nodes: nds,
+            type: type
         }
-    }).filter(function(way){
-        return way.nodes.length > 2 && way.building;
+    }).filter(function(way) {
+        return way.nodes.length > 3 && way.type;
     })
-    
+
     module.exports = {
         name: 'gugong',
         data: function() {
             return {
-                ways:ways
+                ways: ways
             }
         },
         methods: {},
         mounted: function() {
-           this.$refs.geometry.addAttribute('position', particlePositions, 3, true);
+            //this.$refs.geometry.addAttribute('position', particlePositions, 3, true);
         },
         components: {
             'way': require('./way.vue')

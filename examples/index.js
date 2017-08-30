@@ -32,6 +32,7 @@ var routes = [
   { path: '/Cubo', component: require('./demo/Cubo.vue') },
   { path: '/Global', component: require('./demo/Global.vue') },
   { path: '/Gugong', component: require('./demo/gugong/index.vue') },
+  { path: '/Pops_1', component: require('./demo/pops/Pops_1.vue') },
   
   { path: '*', redirect: '/BoxGeometryTest'}
 ]
