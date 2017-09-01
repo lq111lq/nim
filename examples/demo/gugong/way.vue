@@ -161,6 +161,11 @@
             }
 
         },
+        beforeDestroy: function() {
+            var child = this.object3D.children[0];
+            child && child.geometry && child.geometry.dispose();
+            child && child.material && child.material.dispose();
+        },
         methods: {
             draw: function() {
 

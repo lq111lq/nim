@@ -298,7 +298,7 @@
                     vertexColors: THREE.VertexColors
                 });
                 var mesh = new THREE.Mesh(geometry, material);
-                mesh.scale.y = 0;
+                mesh.scale.y = 1;
 
                 mesh.element = this.$el;
                 mesh.vm = this;
@@ -307,19 +307,19 @@
                 this.cube_geometry = geometry;
                 this.cube_material = material;
 
-                var from = {
-                    v: 0
-                }
-
-                new TWEEN.Tween(from)
-                    .to({
-                        v: 1
-                    }, 1000)
-                    .onUpdate(function() {
-                        mesh.scale.y = from.v
-                    })
-                    .delay(0)
-                    .start();
+//              var from = {
+//                  v: 0
+//              }
+//
+//              new TWEEN.Tween(from)
+//                  .to({
+//                      v: 1
+//                  }, 1000)
+//                  .onUpdate(function() {
+//                      mesh.scale.y = from.v
+//                  })
+//                  .delay(0)
+//                  .start();
             }
         },
         beforeDestroy: function() {

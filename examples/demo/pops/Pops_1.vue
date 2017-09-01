@@ -24,7 +24,7 @@
                         </mesh-basic-material>
                     </mesh>
 
-                    <local-label v-if="darwed" v-for="v,k,i in pops" :points="v.slice(0,15)" :delay="i*50" @mouseenter.native="handleMouseenter(k,v)" @mouseout.native="handleMouseout(k)"></local-label>
+                    <local-label v-if="darwed" v-for="v,k,i in pops" :points="v.slice(0,5)" :delay="i*50" @mouseenter.native="handleMouseenter(k,v)" @mouseout.native="handleMouseout(k)"></local-label>
                     <!--<grid-helper :size="100" :divisions="100"></grid-helper>-->
                 </scene>
             </renderer>
