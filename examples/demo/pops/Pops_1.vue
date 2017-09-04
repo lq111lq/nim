@@ -14,7 +14,7 @@
                 <span>{{focus.v}}</span>
             </div>
             <canvas ref="canvas" width="3840" height="1920" style="display: none;"></canvas>
-            <renderer class="renderer" clearColor="#fafafa">
+            <renderer class="renderer" clearColor="#fafafa" event="true">
                 <perspective-camera-control positionZ="200" positionY="200"></perspective-camera-control>
                 <scene>
                     <mesh :rotationX="-Math.PI*0.5">

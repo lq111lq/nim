@@ -16,7 +16,11 @@
             }
         },
         props: {
-            clearColor: String
+            clearColor: String,
+            event: {
+                type: Boolean,
+                default: false
+            }
         },
         watch: {
             w: 'resize',
@@ -55,10 +59,11 @@
                 self.h = $el.height();
             }
             render();
-
-            this.$el.addEventListener('click', onClick, false);
-            this.$el.addEventListener('mouseover', onMouseover, false);
-            this.$el.addEventListener('mousemove', onMouseover, false);
+            if(this.event) {
+                this.$el.addEventListener('click', onClick, false);
+                this.$el.addEventListener('mouseover', onMouseover, false);
+                this.$el.addEventListener('mousemove', onMouseover, false);
+            }
 
             var raycaster = new THREE.Raycaster();
 

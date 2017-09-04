@@ -1,18 +1,17 @@
 <template>
     <el-row style="height: 100%;">
         <el-col :span="24" style="height: 100%;padding: 10px;">
-            <renderer class="renderer" >
+            <renderer class="renderer">
                 <perspective-camera-control positionZ="0" positionY="50"></perspective-camera-control>
                 <scene>
-                    <!--<mesh :rotationX="-Math.PI*0.5">
-                        <plane-geometry :width="9600" height="4800">></plane-geometry>
-                        <mesh-basic-material color="#ffffff" :transparent="true">
-                            <texture slot="map" ref="canvasTexture"></texture>
-                        </mesh-basic-material>
-                    </mesh>-->
+                    <mesh :rotationX="-Math.PI*0.5" positionY="-1">
+                        <plane-geometry :width="3000" height="3000">></plane-geometry>
+                        <mesh-phong-material color="#343434">
+                        </mesh-phong-material>
+                    </mesh>
                     
-                    <point-light :intensity="1" color="#ffff88" positionY="150" positionX="-150"></point-light>
-                    <point-light :intensity="1" color="#dddddd" positionY="150" positionX="150"></point-light>
+                    <point-light :intensity="0.5" color="#ffff88" positionY="150" positionX="-150"></point-light>
+                    <point-light :intensity="0.9" color="#dddddd" positionY="150" positionX="0"></point-light>
                     
                     <building v-if="features.length" :features="features"></building>
                     <!--<grid-helper :size="100" :divisions="100"></grid-helper>-->
@@ -102,7 +101,7 @@
 
                         var feature = result.value;
                         feature.properties.name = geoJSON.features.length + '';
-                        feature.properties.height = feature.properties.SHAPE_leng * 100;
+                        feature.properties.height = feature.properties.SHAPE_leng * 200 + 0.15;
                         geoJSON.features.push(feature);
                         return source.read().then(append);
                     })
