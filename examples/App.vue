@@ -36,6 +36,7 @@
                     
                     <el-submenu index="3">
                         <template slot="title">demo</template>
+                        <el-menu-item index="CapeTown">CapeTown</el-menu-item>
                         <el-menu-item index="Cubo">Cubo</el-menu-item>
                         <el-menu-item index="Global">Global</el-menu-item>
                         <el-menu-item index="Gugong">Gugong</el-menu-item>

@@ -28,6 +28,7 @@
     "postcss-salad": "^1.0.8",
     "promise": "^7.1.1",
     "queue": "^4.2.1",
+    "shapefile": "^0.6.6",
     "shelljs": "^0.7.6",
     "style-loader": "^0.13.1",
     "topojson": "^2.2.0",

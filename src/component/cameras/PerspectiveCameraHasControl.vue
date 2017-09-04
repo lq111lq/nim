@@ -46,7 +46,7 @@
             var controls = new OrbitControls(camera, this.$parent.$el);
             controls.maxPolarAngle = Math.PI * 0.5;
             controls.minDistance = 0;
-            controls.maxDistance = 750;
+            controls.maxDistance = 7500;
             controls.reset();
 
             this.$emit('object3DCreated');

@@ -78,7 +78,13 @@ var routes = [{
             require(['./tool/pointsTool.vue'], resolve)
         }
     },
-
+    
+    {
+        path: '/CapeTown',
+        component: function(resolve) {
+            require(['./demo/CapeTown/index.vue'], resolve)
+        }
+    },
     {
         path: '/Cubo',
         component: function(resolve) {
